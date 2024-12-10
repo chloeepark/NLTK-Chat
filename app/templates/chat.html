@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="chat-container">
+    <div id="chat-window">
+        <div id="messages"></div>
+    </div>
+    <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button type="submit">Send</button>
+    </form>
+</div>
+<script>
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("user-input");
+    const messages = document.getElementById("messages");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const userText = input.value;
+        appendMessage("You", userText);
+        input.value = "";
+
+        const response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: userText }),
+        });
+
+        const data = await response.json();
+        appendMessage("Bot", data.response);
+    });
+
+    function appendMessage(sender, text) {
+        const message = document.createElement("div");
+        message.className = sender.toLowerCase();
+        message.textContent = `${sender}: ${text}`;
+        messages.appendChild(message);
+    }
+</script>
+{% endblock %}
