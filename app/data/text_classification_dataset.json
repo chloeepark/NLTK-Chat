@@ -1,0 +1,14 @@
+[
+   {"text": "hello", "label": "greeting"},
+   {"text": "hi there", "label": "greeting"},
+   {"text": "how are you?", "label": "greeting"},
+   {"text": "what is your name?", "label": "question"},
+   {"text": "how does this work?", "label": "question"},
+   {"text": "can you help me?", "label": "question"},
+   {"text": "this is amazing", "label": "feedback"},
+   {"text": "I love this app", "label": "feedback"},
+   {"text": "this is not working", "label": "complaint"},
+   {"text": "I am unhappy with the service", "label": "complaint"},
+   {"text": "thank you", "label": "gratitude"},
+   {"text": "thanks a lot", "label": "gratitude"}
+]

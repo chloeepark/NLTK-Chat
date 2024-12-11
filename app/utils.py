@@ -11,15 +11,25 @@ from langdetect.lang_detect_exception import LangDetectException
 DetectorFactory.seed = 0
 analyzer = SentimentIntensityAnalyzer()
 
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
+try:
+    nltk.data.find('tokenizers/punkt')  
+except LookupError:
+    nltk.download('punkt')
+
+try:
+    nltk.data.find('corpora/stopwords') 
+except LookupError:
+    nltk.download('stopwords')
+
+try:
+    nltk.data.find('corpora/wordnet') 
+except LookupError:
+    nltk.download('wordnet')
 
 # Sentiment analysis function
 def analyze_sentiment(text):
     sentiment_scores = analyzer.polarity_scores(text)
     return sentiment_scores
-
 
 stemmer = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
@@ -58,7 +68,7 @@ def lemmatize_tokens(tokens):
 
 # Preprocessing Pipeline
 def preprocess_input(text):
-    tokens = tokenize_text(text)            # Tokenization
-    tokens = remove_stopwords(tokens)       # Stopword Removal
-    tokens = lemmatize_tokens(tokens)       # Lemmatization
+    tokens = tokenize_text(text)            
+    tokens = remove_stopwords(tokens)       
+    tokens = lemmatize_tokens(tokens)       
     return tokens

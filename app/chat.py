@@ -1,5 +1,6 @@
 # Code handling the main logic for the chatbot
 from .utils import detect_language, preprocess_input, analyze_sentiment
+from .process_user_input import train_classifier, classify_input
 import openai
 from dotenv import load_dotenv
 import os
@@ -7,6 +8,9 @@ import os
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+# Train the classifier once to reuse across multiple calls
+chatbot_classifier = train_classifier()
 
 def process_user_input(user_input):
     # Language detection
@@ -27,6 +31,10 @@ def process_user_input(user_input):
         sentiment = "positive"
     elif sentiment_scores["compound"] < -0.1:
         sentiment = "negative"
+
+    # Text Classification
+    category = classify_input(user_input, chatbot_classifier)
+    print(f"User Input: {user_input} -> Detected Category: {category}")
     
     # Emotion-based system message configuration
     if sentiment == "positive":
@@ -52,5 +60,6 @@ def process_user_input(user_input):
     return {
         "language": language,
         "sentiment": sentiment,
+        "category": category,
         "response": response
     }

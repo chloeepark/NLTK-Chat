@@ -1,52 +1,94 @@
 body {
-   font-family: Arial, sans-serif;
+   font-family: 'Poppins', Arial, sans-serif;
    margin: 0;
    padding: 0;
    background-color: #f4f4f9;
+   color: #333;
+   line-height: 1.6;
 }
 
 header {
    text-align: center;
-   padding: 1rem;
-   background-color: #23abff;
+   padding: 1.0rem;
+   background: linear-gradient(45deg, #23abff, #1a73e8);
    color: #fff;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   font-size: 1.0rem;
+   font-weight: bold;
+   letter-spacing: 1px;
 }
 
 .chat-container {
    max-width: 600px;
    margin: 2rem auto;
-   background: #fff;
-   border-radius: 10px;
-   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-   padding: 1rem;
+   background: #ffffff;
+   border-radius: 15px;
+   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+   padding: 1.5rem;
+   overflow: hidden;
 }
 
 #chat-window {
-   height: 300px;
+   height: 350px;
    overflow-y: auto;
-   border: 1px solid #ccc;
+   border: 1px solid #e0e0e0;
+   border-radius: 10px;
+   padding: 1rem;
+   margin-bottom: 1.5rem;
+   background-color: #f9f9fc;
+   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#chat-window::-webkit-scrollbar {
+   width: 10px;
+}
+
+#chat-window::-webkit-scrollbar-thumb {
+   background: #23abff;
    border-radius: 5px;
-   padding: 0.5rem;
-   margin-bottom: 1rem;
-   background-color: #fafafa;
+}
+
+#chat-window::-webkit-scrollbar-track {
+   background: #e0e0e0;
+   border-radius: 5px;
 }
 
 #chat-form {
    display: flex;
+   gap: 0.5rem;
 }
 
 #user-input {
    flex: 1;
-   padding: 0.5rem;
-   border: 1px solid #ccc;
-   border-radius: 5px;
+   padding: 0.75rem;
+   border: 1px solid #ddd;
+   border-radius: 10px;
+   font-size: 1rem;
+   transition: box-shadow 0.3s ease;
+}
+
+#user-input:focus {
+   outline: none;
+   box-shadow: 0 0 5px rgba(35, 171, 255, 0.7);
 }
 
 button {
-   padding: 0.5rem 1rem;
-   background-color: #ff92fa;
-   color: #000000;
+   padding: 0.75rem 1.5rem;
+   background: linear-gradient(45deg, #32CD32, #28a745);
+   color: #ffffff;
    border: none;
-   border-radius: 5px;
+   border-radius: 10px;
+   font-size: 1rem;
+   font-weight: bold;
    cursor: pointer;
+   transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+   background: linear-gradient(45deg, #28a745, #32CD32);
+   transform: translateY(-2px);
+}
+
+button:active {
+   transform: translateY(0);
 }
