@@ -1,3 +1,4 @@
+# Code handling the main logic for the chatbot
 from .utils import detect_language, preprocess_input, analyze_sentiment
 import openai
 from dotenv import load_dotenv
@@ -16,30 +17,32 @@ def process_user_input(user_input):
     # Text Preprocessing
     processed_tokens = preprocess_input(user_input)
     processed_text = ' '.join(processed_tokens) 
+    print(f"Original Text: {user_input}")
+    print(f"Processed Text: {processed_text}")
 
     # Sentiment Analysis
     sentiment_scores = analyze_sentiment(user_input)
     sentiment = "neutral"
-    if sentiment_scores["compound"] > 0.05:
+    if sentiment_scores["compound"] > 0.1:
         sentiment = "positive"
-    elif sentiment_scores["compound"] < -0.05:
+    elif sentiment_scores["compound"] < -0.1:
         sentiment = "negative"
     
     # Emotion-based system message configuration
     if sentiment == "positive":
-        system_message = f"You are an assistant that responds warmly and enthusiastically in {language}."
+        system_message = f"You are an assistant that provides cheerful and encouraging responses in {language}."
     elif sentiment == "negative":
-        system_message = f"You are an assistant that responds empathetically and offers support in {language}."
+        system_message = f"You are an assistant that offers empathetic and supportive advice in {language}."
     else:
-        system_message = f"You are an assistant that responds neutrally and professionally in {language}."
+        system_message = f"You are an assistant that provides clear and professional information in {language}."
 
     try:
         # Call ChatGPT API
         gpt_response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": f"You are an assistant that responds in {language}. The user seems {sentiment}."},
-                {"role": "user", "content": processed_text}
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": f"Original: {user_input}\nProcessed: {processed_text}"}
             ]
         )
         response = gpt_response["choices"][0]["message"]["content"]

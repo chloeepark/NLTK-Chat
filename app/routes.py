@@ -1,3 +1,4 @@
+# Manages application routing
 from flask import Blueprint, render_template, jsonify, request
 from .chat import process_user_input
 

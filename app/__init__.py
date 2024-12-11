@@ -1,3 +1,4 @@
+# Code related to project initialization
 from flask import Flask
 
 def create_app():

@@ -1,3 +1,4 @@
+# Contains utility functions
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
@@ -24,9 +25,10 @@ stemmer = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
 
 # Language detection function
-def detect_language(text):
-    """입력 텍스트의 언어를 감지"""
+def detect_language(text):  
     try:
+        if not text.strip():
+            return "en"
         language = detect(text)
     except LangDetectException:
         language = "en"
